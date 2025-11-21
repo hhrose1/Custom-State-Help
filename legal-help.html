@@ -1,6 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lease-Decoder-AI | Get Legal Help</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="site-logo">Tenant Help</div>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="lease-decoder.html">Lease Decoder AI</a>
+      <a href="lease-red-flags.html">Lease Red Flags</a>
+      <a href="common-questions.html">Common Lease Questions</a>
+      <a href="legal-help.html" class="active">Get Legal Help</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Get Legal Help</h2>
+    <p>
+      Use this tool to find tenant legal help based on your location. This is an early
+      version and currently only supports Alaska and Alabama, but more states will be added over time.
+    </p>
+
+    <!-- Location selector -->
+    <section style="margin-top: 1.5rem;">
+      <h3>Find help in your area</h3>
+      <p><em>Start by choosing your state, then county, and university (if applicable).</em></p>
+
+      <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 500px;">
+        <!-- State -->
+        <div>
+          <label for="stateSelect"><strong>State</strong></label><br />
+          <select id="stateSelect">
+            <option value="">-- Select a state --</option>
+          </select>
+        </div>
+
+        <!-- County -->
+        <div>
+          <label for="countySelect"><strong>County / Borough</strong></label><br />
+          <select id="countySelect" disabled>
+            <option value="">-- Select a county / borough --</option>
+          </select>
+        </div>
+
+        <!-- University -->
+        <div>
+          <label for="universitySelect"><strong>University (optional)</strong></label><br />
+          <select id="universitySelect" disabled>
+            <option value="">-- No university selected --</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section style="margin-top: 2rem;">
+      <h3>Results</h3>
+      <div id="legalHelpResults">
+        <p><em>Select your state and county to see available tenant legal help.</em></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Tenant Help — This site does not provide legal advice. Information is for general
+    guidance only. For specific legal advice, contact a licensed attorney.
+  </footer>
+
   <script>
     // ========= DATA =========
-    // Right now we only support Alaska. More states can be added later.
     const legalData = {
       "Alaska": {
         counties: [
@@ -35,18 +107,12 @@
           "Yakutat",
           "Yukon-Koyukuk"
         ],
+        // Only major universities in Alaska
         universities: [
           "University of Alaska Anchorage",
           "University of Alaska Fairbanks",
           "University of Alaska Southeast",
-          "Alaska Bible College",
           "Alaska Pacific University",
-          "Saint Herman Theological Seminary",
-          "Iḷisaġvik College",
-          "Kenai Peninsula College",
-          "Kodiak College",
-          "Matanuska–Susitna College",
-          "Prince William Sound College",
           "Other / Not Listed"
         ],
         resource: {
@@ -62,6 +128,215 @@
             details: "If you are being evicted for any reason, call this number to apply for legal help."
           }
         }
+      },
+
+      "Alabama": {
+        counties: [
+          "Autauga",
+          "Baldwin",
+          "Barbour",
+          "Bibb",
+          "Blount",
+          "Bullock",
+          "Butler",
+          "Calhoun",
+          "Chambers",
+          "Cherokee",
+          "Chilton",
+          "Choctaw",
+          "Clarke",
+          "Clay",
+          "Cleburne",
+          "Coffee",
+          "Colbert",
+          "Conecuh",
+          "Coosa",
+          "Covington",
+          "Crenshaw",
+          "Cullman",
+          "Dale",
+          "Dallas",
+          "DeKalb",
+          "Elmore",
+          "Escambia",
+          "Etowah",
+          "Fayette",
+          "Franklin",
+          "Geneva",
+          "Greene",
+          "Hale",
+          "Henry",
+          "Houston",
+          "Jackson",
+          "Jefferson",
+          "Lamar",
+          "Lauderdale",
+          "Lawrence",
+          "Lee",
+          "Limestone",
+          "Lowndes",
+          "Macon",
+          "Madison",
+          "Marengo",
+          "Marion",
+          "Marshall",
+          "Mobile",
+          "Monroe",
+          "Montgomery",
+          "Morgan",
+          "Perry",
+          "Pickens",
+          "Pike",
+          "Randolph",
+          "Russell",
+          "Shelby",
+          "St. Clair",
+          "Sumter",
+          "Talladega",
+          "Tallapoosa",
+          "Tuscaloosa",
+          "Walker",
+          "Washington",
+          "Wilcox",
+          "Winston"
+        ],
+        universities: [
+          "University of Alabama",
+          "Auburn University",
+          "University of Alabama at Birmingham",
+          "University of South Alabama",
+          "Troy University",
+          "Alabama State University",
+          "Other / Not Listed"
+        ],
+        // Default Alabama-wide legal aid
+        defaultResource: {
+          name: "Alabama Legal Help",
+          website: "https://www.alabamalegalhelp.org",
+          description: "Statewide legal aid resource. You can apply online or find your local office. You can also dial 2-1-1 in Alabama to be connected with local tenant and social service organizations."
+        },
+        // Extra / county-specific programs
+        perCountyResources: {
+          "Mobile": [
+            {
+              name: "South Alabama Volunteer Lawyers Program",
+              website: "https://www.alabamalegalhelp.org/organization/mobile-bar-association-volunteer-lawyers-prog/housing/landlord-and-tenant?ref=663g3",
+              description: "Provides free legal assistance to low-income residents of Mobile, Baldwin, Clarke, and Washington counties. Walk-in hours: Wednesday–Friday, 9:30 a.m. – 11:30 a.m.",
+              phone: "1-885-997-2857"
+            }
+          ],
+          "Baldwin": [
+            {
+              name: "South Alabama Volunteer Lawyers Program",
+              website: "https://www.alabamalegalhelp.org/organization/mobile-bar-association-volunteer-lawyers-prog/housing/landlord-and-tenant?ref=663g3",
+              description: "Provides free legal assistance to low-income residents of Mobile, Baldwin, Clarke, and Washington counties. Walk-in hours: Wednesday–Friday, 9:30 a.m. – 11:30 a.m.",
+              phone: "1-885-997-2857"
+            }
+          ],
+          "Madison": [
+            {
+              name: "Madison County Volunteer Lawyers Program",
+              website: "https://vlpmadisoncounty.org/get-help/",
+              description: "Volunteer lawyers providing free civil legal services to eligible residents of Madison County. Strongly encourages applying by phone or online form.",
+              phone: "(256) 539-2275"
+            }
+          ],
+          "Montgomery": [
+            {
+              name: "Montgomery County Bar Volunteer Lawyers Program (MVLP)",
+              website: "https://montgomeryvlp.org/get-assistance/",
+              description: "Provides free legal advice through walk-in clinics. If you qualify, your case may be referred to an attorney for extended representation. Clinics: first and third Tuesday (3–5 p.m.) at Flatline Church at Chisholm; second Thursday (3–5 p.m.) at Strong Tower at Washington Park.",
+              phone: "(866) 456-4995"
+            }
+          ],
+          "Tuscaloosa": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            },
+            {
+              name: "University of Alabama Civil Law Clinic",
+              website: "https://law.ua.edu/academics/law-clinics/civil-law-clinic/",
+              description: "Law school clinic providing free civil legal help to the surrounding community, including some housing-related issues.",
+              phone: "(205) 348-4960"
+            }
+          ],
+          "Shelby": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ],
+          "Lee": [
+            {
+              name: "Lee County Judicial Circuit Court – Legal Services",
+              website: "https://lee.alacourt.gov/legal-services/",
+              description: "The courthouse provides information and links to legal service resources for residents of Lee County.",
+              phone: "(334) 737-3526"
+            },
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ],
+          "Morgan": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ],
+          "Calhoun": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ],
+          "Houston": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ],
+          "Limestone": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ],
+          "Etowah": [
+            {
+              name: "Alabama Legal Help",
+              website: "https://www.alabamalegalhelp.org",
+              description: "Statewide legal aid resource. You can apply online or find your local office.",
+              phone: "1-866-456-4995"
+            }
+          ]
+        },
+        // Extra resources triggered by university choice
+        universityResources: {
+          "University of Alabama": [
+            {
+              name: "University of Alabama Civil Law Clinic",
+              website: "https://law.ua.edu/academics/law-clinics/civil-law-clinic/",
+              description: "Law school clinic providing free civil legal help to University of Alabama students and community members in the surrounding area.",
+              phone: "(205) 348-4960"
+            }
+          ]
+        }
       }
     };
 
@@ -71,13 +346,11 @@
     const universitySelect = document.getElementById("universitySelect");
     const resultsDiv = document.getElementById("legalHelpResults");
 
-    // If the page didn't load these elements for some reason, just stop.
     if (stateSelect && countySelect && universitySelect && resultsDiv) {
       initLocationForm();
     }
 
     function initLocationForm() {
-      // Populate states (only Alaska for now)
       const states = Object.keys(legalData).sort();
       states.forEach((state) => {
         const opt = document.createElement("option");
@@ -86,7 +359,6 @@
         stateSelect.appendChild(opt);
       });
 
-      // Event listeners
       stateSelect.addEventListener("change", handleStateChange);
       countySelect.addEventListener("change", updateResults);
       universitySelect.addEventListener("change", updateResults);
@@ -95,7 +367,6 @@
     function handleStateChange() {
       const state = stateSelect.value;
 
-      // Reset lower dropdowns
       countySelect.innerHTML = '<option value="">-- Select a county / borough --</option>';
       countySelect.disabled = true;
 
@@ -110,25 +381,64 @@
       const stateInfo = legalData[state];
 
       // Populate counties
-      stateInfo.counties.forEach((county) => {
-        const opt = document.createElement("option");
-        opt.value = county;
-        opt.textContent = county;
-        countySelect.appendChild(opt);
-      });
-      countySelect.disabled = false;
+      if (Array.isArray(stateInfo.counties)) {
+        stateInfo.counties.forEach((county) => {
+          const opt = document.createElement("option");
+          opt.value = county;
+          opt.textContent = county;
+          countySelect.appendChild(opt);
+        });
+        countySelect.disabled = false;
+      }
 
-      // Populate universities (same list for now anywhere in Alaska)
-      stateInfo.universities.forEach((uni) => {
-        const opt = document.createElement("option");
-        opt.value = uni;
-        opt.textContent = uni;
-        universitySelect.appendChild(opt);
-      });
-      universitySelect.disabled = false;
+      // Populate universities
+      if (Array.isArray(stateInfo.universities)) {
+        stateInfo.universities.forEach((uni) => {
+          const opt = document.createElement("option");
+          opt.value = uni;
+          opt.textContent = uni;
+          universitySelect.appendChild(opt);
+        });
+        universitySelect.disabled = false;
+      }
 
-      // Update results whenever state changes
       updateResults();
+    }
+
+    function buildAlaskaResources() {
+      const resource = legalData["Alaska"].resource;
+      return [resource];
+    }
+
+    function buildAlabamaResources(county, university) {
+      const al = legalData["Alabama"];
+      let resources = [];
+
+      // County-specific resources
+      if (county && al.perCountyResources && al.perCountyResources[county]) {
+        resources = resources.concat(al.perCountyResources[county]);
+      } else {
+        // Default statewide resource
+        resources.push(al.defaultResource);
+      }
+
+      // Ensure Alabama Legal Help appears at least once for every county
+      const hasALH = resources.some(r => r.name === "Alabama Legal Help");
+      if (!hasALH) {
+        resources.push(al.defaultResource);
+      }
+
+      // University-specific resources (e.g., UA Civil Law Clinic)
+      if (university && al.universityResources && al.universityResources[university]) {
+        al.universityResources[university].forEach((r) => {
+          const alreadyIn = resources.some(existing => existing.name === r.name);
+          if (!alreadyIn) {
+            resources.push(r);
+          }
+        });
+      }
+
+      return resources;
     }
 
     function updateResults() {
@@ -141,9 +451,14 @@
         return;
       }
 
-      const { resource } = legalData[state];
+      let resources = [];
 
-      // Build the results HTML
+      if (state === "Alaska") {
+        resources = buildAlaskaResources();
+      } else if (state === "Alabama") {
+        resources = buildAlabamaResources(county, university);
+      }
+
       let locationLine = "";
       if (county && university) {
         locationLine = `<p><strong>Selected location:</strong> ${county}, ${state}${university ? " — " + university : ""}</p>`;
@@ -153,43 +468,51 @@
         locationLine = `<p><strong>Selected location:</strong> ${state}</p>`;
       }
 
+      if (!resources.length) {
+        resultsDiv.innerHTML = `
+          ${locationLine}
+          <p><em>No specific tenant legal resources configured yet for this location. Try contacting your statewide legal aid office or dialing 2-1-1 to find local assistance.</em></p>
+        `;
+        return;
+      }
+
+      // Build cards for each resource
+      const cardsHtml = resources.map((resource) => {
+        const phoneLine = resource.phone
+          ? `<p><strong>Phone:</strong> ${resource.phone}</p>`
+          : "";
+
+        const websiteLine = resource.website
+          ? `<p><a href="${resource.website}" target="_blank" rel="noopener noreferrer">${resource.website}</a></p>`
+          : "";
+
+        return `
+          <div style="
+            margin-top: 1rem;
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+          ">
+            <h4 style="margin-top: 0;">${resource.name}</h4>
+            ${websiteLine}
+            <p>${resource.description || ""}</p>
+            ${phoneLine}
+          </div>
+        `;
+      }).join("");
+
+      const extraNote = state === "Alabama"
+        ? `<p style="font-size: 0.85rem; color: #6b7280; margin-top: 0.75rem;">
+            In Alabama, you can also dial <strong>2-1-1</strong> to be connected with local tenant advocacy,
+            housing, and social service organizations that may offer additional assistance.
+           </p>`
+        : "";
+
       resultsDiv.innerHTML = `
         ${locationLine}
-        <div style="
-          margin-top: 1rem;
-          padding: 1rem 1.25rem;
-          border-radius: 10px;
-          border: 1px solid #e5e7eb;
-          background: #f9fafb;
-        ">
-          <h4 style="margin-top: 0;">Recommended Tenant Legal Aid</h4>
-          <p>
-            <strong>${resource.name}</strong><br />
-            <a href="${resource.website}" target="_blank" rel="noopener noreferrer">
-              ${resource.website}
-            </a>
-          </p>
-          <p>${resource.description}</p>
-          <p>
-            <strong>General Helpline:</strong><br />
-            Phone: ${resource.generalHelpline.phone}<br />
-            <span style="font-size: 0.9rem; color: #4b5563;">
-              ${resource.generalHelpline.details}
-            </span>
-          </p>
-          <p>
-            <strong>Eviction Line:</strong><br />
-            Phone: ${resource.evictionLine.phone}<br />
-            <span style="font-size: 0.9rem; color: #4b5563;">
-              ${resource.evictionLine.details}
-            </span>
-          </p>
-          <p style="font-size: 0.85rem; color: #6b7280; margin-top: 0.75rem;">
-            This information is based on publicly available resources and may not be exhaustive.
-            If you are in immediate danger of losing housing, contact Alaska Legal Services
-            as soon as possible and consider reaching out to local emergency or social services.
-          </p>
-        </div>
+        ${cardsHtml}
+        ${extraNote}
       `;
     }
   </script>
